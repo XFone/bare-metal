@@ -1,7 +1,7 @@
 .DS_Store
-*/*.log
-log
 .vagrant
-*/*.iso
-*/*.img
-*/*.qcow2
+*.log
+*.iso
+*.img
+*.qcow2
+log
