@@ -1,0 +1,3 @@
+[submodule "ipmi/src/infra-ecosphere"]
+	path = ipmi/src/infra-ecosphere
+	url = https://github.com/rmxymh/infra-ecosphere
