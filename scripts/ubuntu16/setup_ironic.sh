@@ -32,19 +32,21 @@ SQL
 source ~/.profile
 
 OS_VERSION="stable/pike"
-apt-get install -y ipmitool tftpd-hpa apache2 libapache2-mod-wsgi python-pip
+apt-get install -y ipmitool tftpd-hpa apache2 libapache2-mod-wsgi
 
 git clone https://git.openstack.org/openstack/ironic -b $OS_VERSION --depth=1
 cd ironic
 
-pip install -U pip
+pip install -U python-ironicclient
 pip install --ignore-installed PyYAML -r requirements.txt -e .
 python setup.py build
 python setup.py install
 cd  ..
 
+# install services (replace /usr/bin/ironic-api with /usr/local/bin)
+apt-get install -y ironic-api ironic-conductor
+
 # Configuring ironic-api service
-mkdir -p /etc/ironic/
 cp -a ./ironic.conf /etc/ironic/ironic.conf
 
 # Create the Bare Metal service database tables
@@ -68,7 +70,10 @@ service apache2 reload
 
 # --------------------- Setup Ironic UI -----------------------
 
+cp -a ./os_env.sh /home/vagrant
+
 # TODO (check python3 version)
+
 # --------------------- Setup tftp Service -----------------------
 
 # Prepare images' path

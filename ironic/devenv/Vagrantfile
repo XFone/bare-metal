@@ -44,10 +44,11 @@ Vagrant.configure("2") do |config|
       # setup scripts
       cd #{LOCALDEV}/scripts/ubuntu16
       ./setup_box.sh
+      ./setup_python.sh
       ./setup_rabbitmq.sh
       ./setup_keystone.sh
-      # ./setup_horizon.sh
-      # ./setup_ironic.sh
+      ./setup_horizon.sh
+      ./setup_ironic.sh
     SCRIPT
 
     # VirtualBox

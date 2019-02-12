@@ -10,16 +10,15 @@
 # ----------------- Setup Horizon (dashboard) ------------------
 OS_VERSION="stable/pike"
 
-apt install -y apache2 libapache2-mod-wsgi python-pip
+apt-get install -y apache2 libapache2-mod-wsgi
 
 git clone https://git.openstack.org/openstack/horizon -b $OS_VERSION --depth=1
 cd horizon
 
-pip install -U pip
 # pip install openstacksdk
-pip install -r requirements.txt
+pip install --ignore-installed PyYAML -U python-openstackclient
+pip install -r requirements.txt -e .
 pip install -c https://git.openstack.org/cgit/openstack/requirements/plain/upper-constraints.txt?h=$OS_VERSION .
-pip install -U python-openstackclient
 python setup.py build
 python setup.py install
 
